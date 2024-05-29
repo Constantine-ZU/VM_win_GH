@@ -1,7 +1,7 @@
 variable "win_password" {
   type        = string
   description = "password for windows"
-   default = "ChangeAAAAA_bbbbb"
+   default = "ChangeAA5!_bib"
 }
 variable "win_user" {
   type        = string
