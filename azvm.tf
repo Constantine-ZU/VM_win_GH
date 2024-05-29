@@ -3,6 +3,7 @@ terraform {
     storage_account_name = "constantine2zu"
     container_name       = "tf4config"
     key                  = "terraform.tfstate"
+    sas_token            = "${var.sas_token}"
   }
   required_providers {
     azurerm = {

@@ -13,3 +13,7 @@ variable "dns_name" {
   description = "dns"
    default = "comp301"
 }
+variable "sas_token" {
+  type    = string
+  description = "SAS Token for Azure Storage Account"
+}
