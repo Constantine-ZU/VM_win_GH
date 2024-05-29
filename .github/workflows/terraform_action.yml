@@ -1,13 +1,27 @@
-name: 'Terraform'
+name: Terraform Chouse Action
 
 on:
-  push:
-    branches:
-      - main  
+  workflow_dispatch:
+    inputs:
+      command:
+        type: choice
+        description: Select Terraform command to execute
+        default: plan
+        options:
+          - plan
+          - apply
+          - destroy
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      TF_COMMAND: ${{ github.event.inputs.command }}
 
     steps:
     - uses: actions/checkout@v2
@@ -20,19 +34,20 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    - name: Terraform Plan
-      run: terraform plan
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-    
-
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+    - name: Terraform Command
+      run: |
+        echo "Executing Terraform $TF_COMMAND"
+        case $TF_COMMAND in
+          plan)
+            terraform plan
+            ;;
+          apply)
+            terraform apply -auto-approve
+            ;;
+          destroy)
+            terraform destroy -auto-approve
+            ;;
+          *)
+            echo "No valid command selected."
+            ;;
+        esac

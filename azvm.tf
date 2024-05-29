@@ -1,4 +1,9 @@
 terraform {
+    backend "azurerm" {
+    storage_account_name = "constantine2zu"
+    container_name       = "tf4config"
+    key                  = "terraform.tfstate"
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
