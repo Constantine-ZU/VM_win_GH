@@ -40,13 +40,13 @@ jobs:
         echo "Executing Terraform $TF_COMMAND"
         case $TF_COMMAND in
           plan)
-            terraform plan
+            terraform plan -lock=false
             ;;
           apply)
-            terraform apply -auto-approve
+            terraform apply -auto-approve -lock=false
             ;;
           destroy)
-            terraform destroy -auto-approve
+            terraform destroy -auto-approve -lock=false
             ;;
           *)
             echo "No valid command selected."
