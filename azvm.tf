@@ -2,7 +2,7 @@ terraform {
     backend "azurerm" {
     storage_account_name = "constantine2zu"
     container_name       = "tf4config"
-    key                  = "terraform4.tfstate"
+    key                  = "terraform1.tfstate"
 
   }
   required_providers {
@@ -12,6 +12,7 @@ terraform {
     }
   }
 }
+
 
 
 provider "azurerm" {
