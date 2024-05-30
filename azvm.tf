@@ -61,7 +61,7 @@ resource "azurerm_windows_virtual_machine" "example_vm" {
   resource_group_name = azurerm_resource_group.rg-srv-win.name
   location            = azurerm_resource_group.rg-srv-win.location
   size                = "Standard_E2s_v3"
-  admin_username      = var.win_password
+  admin_username      = var.win_user
   admin_password      = var.win_password 
   network_interface_ids = [
     azurerm_network_interface.nic_vm.id,
