@@ -1,4 +1,4 @@
-name: Terraform Chouse Action
+name: TF Azure Action
 
 on:
   workflow_dispatch:
