@@ -38,7 +38,7 @@ resource "azurerm_public_ip" "example_ip" {
   location            = azurerm_resource_group.rg-srv-win.location
   resource_group_name = azurerm_resource_group.rg-srv-win.name
   allocation_method   = "Dynamic"
-  domain_name_label   = var.dns_name
+  domain_name_label   = var.dns_comp_name
 
 }
 
@@ -48,7 +48,7 @@ resource "azurerm_network_interface" "nic_vm" {
   resource_group_name = azurerm_resource_group.rg-srv-win.name
 
   ip_configuration {
-    name                          = "internal"
+    name                          = "internal-vmwin2022-ip"
     subnet_id                     = azurerm_subnet.subnet_10_10_10.id
     private_ip_address_allocation = "Static"
     private_ip_address            = "10.10.10.8" 

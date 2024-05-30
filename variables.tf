@@ -8,8 +8,13 @@ variable "win_user" {
   description = "user for windows"
    default = "user101"
 }
-variable "dns_name" {
+variable "dns_comp_name" {
   type        = string
   description = "dns"
    default = "comp301"
+}
+variable "hetzner_dns_key" {
+  type        = string
+  description = "Hetzner API Secret Key"
+   default = "0000"
 }

@@ -23,7 +23,10 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
       ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
       TF_COMMAND: ${{ github.event.inputs.command }}
-
+      TF_VAR_hetzner_dns_key: ${{ secrets.TF_VAR_HETZNER_DNS_KEY}}
+      TF_VAR_win_user: ${{ secrets.TF_VAR_WIN_USER}}
+      TF_VAR_win_password: ${{ secrets.TF_VAR_WIN_PASSWORD}}
+      TF_VAR_dns_comp_name: ${{ secrets.TF_VAR_DNS_COMP_NAME}}
     steps:
     - uses: actions/checkout@v2
 
