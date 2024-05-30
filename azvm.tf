@@ -2,7 +2,7 @@ terraform {
     backend "azurerm" {
     storage_account_name = "constantine2zu"
     container_name       = "tf4config"
-    key                  = "terraform.tfstate"
+    key                  = "terraform2.tfstate"
 
   }
   required_providers {
