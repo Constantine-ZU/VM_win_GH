@@ -1,6 +1,3 @@
-provider "azurerm" {
-  features {}
-}
 
 resource "azurerm_postgresql_flexible_server" "pg_flex" {
   name                   = "pgdbwebaws"
@@ -10,7 +7,7 @@ resource "azurerm_postgresql_flexible_server" "pg_flex" {
   administrator_login    = "postgres"
   administrator_password ="!qsfzcxVsdfdsfsewr"  
 
-  sku_name = "Standard_B1ms" # Отмечу, что этот параметр выглядит как SKU для VM, а не PostgreSQL в template.json
+  sku_name = "Standard_B1ms" 
 
   storage_mb                  = 32768  # 32 GB
   backup_retention_days       = 7
