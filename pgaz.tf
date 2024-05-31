@@ -5,7 +5,7 @@ resource "azurerm_postgresql_flexible_server" "pg_flex" {
   resource_group_name   = azurerm_resource_group.rg-azweb.name
   version                = "16"
   administrator_login    = "dbuser"
-  administrator_password ="!qsfzcxVsdfdsfsewr"  
+  administrator_password =var.db_password
 
   #sku_name = "GP_Standard_D2s_v3" 
   sku_name               = "Standard_B1ms" 

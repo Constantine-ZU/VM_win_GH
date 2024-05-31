@@ -23,3 +23,9 @@ variable "ssh_public_key" {
   description = "SSH"
    default = ""
 }
+# for postgres
+variable "db_password" {
+  type        = string
+  description = "password for Postgres"
+   default = "0000"
+}
