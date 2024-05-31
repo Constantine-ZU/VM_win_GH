@@ -7,7 +7,7 @@ resource "azurerm_postgresql_flexible_server" "pg_flex" {
   administrator_login    = "postgres"
   administrator_password ="!qsfzcxVsdfdsfsewr"  
 
-  sku_name = "D4ds_v5" 
+  sku_name = "Standard_B1ms" 
 
   storage_mb                  = 32768  # 32 GB
   backup_retention_days       = 7
