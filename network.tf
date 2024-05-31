@@ -17,7 +17,7 @@ resource "azurerm_subnet" "subnet_10_10_10" {
 # ubuntu
 resource "azurerm_resource_group" "rg-azweb" {
   name     = "azweb-resources"
-  location = "West Europe"
+  location = "northeurope"
 }
 
 resource "azurerm_virtual_network" "vnet" {
