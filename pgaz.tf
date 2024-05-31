@@ -1,6 +1,6 @@
 
 resource "azurerm_postgresql_flexible_server" "pg_flex" {
-  name                   = "pgdbWebazB1"
+  name                   = "pgdbwebazb1"
   location              = azurerm_resource_group.rg-azweb.location
   resource_group_name   = azurerm_resource_group.rg-azweb.name
   version                = "16"
@@ -8,7 +8,7 @@ resource "azurerm_postgresql_flexible_server" "pg_flex" {
   administrator_password =var.db_password
 
   #sku_name = "GP_Standard_D2s_v3" 
-  sku_name               = "Standard_B1ms" 
+  sku_name               = "Standard_B2ms" 
   # Standard_B1ms
 
   storage_mb                  = 32768  # 32 GB
