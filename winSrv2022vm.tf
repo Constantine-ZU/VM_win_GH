@@ -1,39 +1,8 @@
-terraform {
-    backend "azurerm" {
-    storage_account_name = "constantine2zu"
-    container_name       = "tf4config"
-    key                  = "terraform3.tfstate"
-
-  }
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0"
-    }
-  }
-}
 
 
 
-provider "azurerm" {
-  features {}
-}
 
-resource "azurerm_virtual_network" "vnet_10_10_10" {
-  name                = "srv-w-1-vnet"
-  address_space       = ["10.10.10.0/24"]
-  location            = azurerm_resource_group.rg-srv-win.location
-  resource_group_name = azurerm_resource_group.rg-srv-win.name
-}
-
-resource "azurerm_subnet" "subnet_10_10_10" {
-  name                 = "subnet-10-10-10"
-  resource_group_name  = azurerm_resource_group.rg-srv-win.name
-  virtual_network_name = azurerm_virtual_network.vnet_10_10_10.name
-  address_prefixes     = ["10.10.10.0/24"]
-}
-
-resource "azurerm_public_ip" "example_ip" {
+resource "azurerm_public_ip" "public_vm_ip" {
   name                = "srv-w-1-ip"
   location            = azurerm_resource_group.rg-srv-win.location
   resource_group_name = azurerm_resource_group.rg-srv-win.name
@@ -43,7 +12,7 @@ resource "azurerm_public_ip" "example_ip" {
 }
 
 resource "azurerm_network_interface" "nic_vm" {
-  name                = "example-nic"
+  name                = "vmwin2022-nic"
   location            = azurerm_resource_group.rg-srv-win.location
   resource_group_name = azurerm_resource_group.rg-srv-win.name
 
@@ -52,12 +21,12 @@ resource "azurerm_network_interface" "nic_vm" {
     subnet_id                     = azurerm_subnet.subnet_10_10_10.id
     private_ip_address_allocation = "Static"
     private_ip_address            = "10.10.10.8" 
-    public_ip_address_id          = azurerm_public_ip.example_ip.id
+    public_ip_address_id          = azurerm_public_ip.public_vm_ip.id
   }
 }
 
 resource "azurerm_windows_virtual_machine" "example_vm" {
-  name                = "example-vm"
+  name                = "vmwin2022-vm"
   resource_group_name = azurerm_resource_group.rg-srv-win.name
   location            = azurerm_resource_group.rg-srv-win.location
   size                = "Standard_E2s_v3"
@@ -87,11 +56,6 @@ resource "azurerm_windows_virtual_machine" "example_vm" {
   patch_mode               = "AutomaticByPlatform"
 
 
-}
-
-resource "azurerm_resource_group" "rg-srv-win" {
-  name     = "rg-win-srv"
- location  = "northeurope"
 }
 
 
