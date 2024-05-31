@@ -1,13 +1,15 @@
 
 resource "azurerm_postgresql_flexible_server" "pg_flex" {
-  name                   = "pgdbwebaws"
-  location               = "northeurope"
-  resource_group_name    = "azweb-resources"
+  name                   = "pgdbWebazB1"
+  location              = azurerm_resource_group.rg-azweb.location
+  resource_group_name   = azurerm_resource_group.rg-azweb.name
   version                = "16"
-  administrator_login    = "postgres"
+  administrator_login    = "dbuser"
   administrator_password ="!qsfzcxVsdfdsfsewr"  
 
-  sku_name = "GP_Standard_D2s_v3" 
+  #sku_name = "GP_Standard_D2s_v3" 
+  sku_name               = "Standard_B1ms" 
+  # Standard_B1ms
 
   storage_mb                  = 32768  # 32 GB
   backup_retention_days       = 7
