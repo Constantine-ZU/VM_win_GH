@@ -18,3 +18,8 @@ variable "hetzner_dns_key" {
   description = "Hetzner API Secret Key"
    default = "0000"
 }
+variable "ssh_public_key" {
+  type        = string
+  description = "SSH"
+   default = ""
+}
