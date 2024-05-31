@@ -25,3 +25,8 @@ resource "azurerm_resource_group" "rg-srv-win" {
   name     = "rg-win-srv"
  location  = "northeurope"
 }
+
+resource "azurerm_resource_group" "rg-azweb" {
+  name     = "azweb-resources"
+  location = "northeurope"
+}
