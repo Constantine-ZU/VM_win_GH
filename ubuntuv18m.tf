@@ -20,6 +20,6 @@ resource "azurerm_linux_virtual_machine" "vm_10_6" {
     username   = "ubuntu"
     public_key = var.ssh_public_key  
   }
-  
+  depends_on = [azurerm_postgresql_flexible_server.pg_flex]
 }
 
