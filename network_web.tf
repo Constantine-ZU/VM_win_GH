@@ -65,5 +65,5 @@ resource "azurerm_public_ip" "vm_20_7" {
   location            = azurerm_resource_group.rg-azweb.location
   resource_group_name = azurerm_resource_group.rg-azweb.name
   allocation_method   = "Dynamic"
-  domain_name_label   = "webaz06"
+  domain_name_label   = "webaz07"
 }
