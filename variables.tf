@@ -23,6 +23,12 @@ variable "ssh_public_key" {
   description = "SSH"
    default = ""
 }
+
+variable "ssh_private_key" {
+  type        = string
+  description = "SSH private key for VM access"
+  default     = ""
+}
 # for postgres
 variable "db_password" {
   type        = string

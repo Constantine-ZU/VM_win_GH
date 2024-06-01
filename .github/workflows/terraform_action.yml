@@ -28,7 +28,9 @@ jobs:
       TF_VAR_win_password: ${{ secrets.TF_VAR_WIN_PASSWORD}}
       TF_VAR_dns_comp_name: ${{ secrets.TF_VAR_DNS_COMP_NAME}}
       TF_VAR_ssh_public_key: ${{ secrets.TF_VAR_SSH_PUBLIC_KEY}}
+      TF_VAR_ssh_private_key: ${{ secrets.TF_VAR_SSH_PRIVATE_KEY }}
       TF_VAR_db_password: ${{ secrets.TF_VAR_DB_PASSWORD}}
+      
     steps:
     - uses: actions/checkout@v2
 
