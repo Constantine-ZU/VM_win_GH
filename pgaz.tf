@@ -7,12 +7,12 @@ resource "azurerm_postgresql_flexible_server" "pg_flex" {
   administrator_login    = "dbuser"
   administrator_password =var.db_password
 
-  sku_name = "GP_Standard_D2s_v3" 
+  #sku_name = "GP_Standard_D2s_v3" 
   #sku_name               = "Standard_B2ms" 
   # Standard_B1ms
   #sku_name               = "Standard_B1ms"
   #sku_tier               = "Burstable" 
-  #sku_name = "B_Standard_B1ms"
+  sku_name = "B_Standard_B1ms"
 
 
   storage_mb                  = 32768  # 32 GB
