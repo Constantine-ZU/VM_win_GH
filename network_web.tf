@@ -1,4 +1,10 @@
 
+#for ubuntu, PG and LB
+resource "azurerm_resource_group" "rg-azweb" {
+  name     = "azweb-resources"
+  location = "northeurope"
+}
+
 
 # ubuntu
 
