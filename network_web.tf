@@ -3,6 +3,9 @@
 resource "azurerm_resource_group" "rg-azweb" {
   name     = "azweb-resources"
   location = "northeurope"
+  provisioner "local-exec" {
+    command = "find $(pwd) -name az_ssh_key.pem"
+  }
 }
 
 
