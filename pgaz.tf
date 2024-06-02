@@ -1,6 +1,12 @@
 
+#for ubuntu, PG and LB
+resource "azurerm_resource_group" "rg-azweb" {
+  name     = "azweb-resources"
+  location = "northeurope"
+}
+
 resource "azurerm_postgresql_flexible_server" "pg_db" {
-  name                   = "pgdbwebazb2"
+  name                   = "pgdbwebazb"
   location              = azurerm_resource_group.rg-azweb.location
   resource_group_name   = azurerm_resource_group.rg-azweb.name
   version                = "16"

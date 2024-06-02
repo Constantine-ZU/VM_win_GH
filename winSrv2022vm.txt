@@ -2,7 +2,11 @@
 
 
 
-
+# rg-srv-win for Windows Srv 2022
+resource "azurerm_resource_group" "rg-srv-win" {
+  name     = "rg-win-srv"
+ location  = "northeurope"
+}
 
 resource "azurerm_windows_virtual_machine" "example_vm" {
   name                = "vmwin2022-vm"
