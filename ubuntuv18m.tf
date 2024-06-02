@@ -53,7 +53,7 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
       type        = "ssh"
       host        = self.public_ip_address
       user        = "ubuntu"
-      private_key = file("${path.module}/pair-key.pem")
+      private_key = file("${path.module}/az_ssh_key.pem")
     }
   }
 
@@ -64,7 +64,7 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
       type        = "ssh"
       host        = self.public_ip_address
       user        = "ubuntu"
-      private_key = file("${path.module}/pair-key.pem")
+      private_key = file("${path.module}/az_ssh_key.pem")
     }
   }
   provisioner "remote-exec" {
@@ -89,7 +89,7 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
       type        = "ssh"
       host        = self.public_ip_address
       user        = "ubuntu"
-      private_key = file("${path.module}/pair-key.pem")
+      private_key = file("${path.module}/az_ssh_key.pem")
     }
   }
 
