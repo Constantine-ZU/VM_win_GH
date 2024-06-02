@@ -30,7 +30,7 @@ jobs:
       TF_VAR_ssh_public_key: ${{ secrets.TF_VAR_SSH_PUBLIC_KEY}}
       TF_VAR_ssh_private_key: ${{ secrets.TF_VAR_SSH_PRIVATE_KEY }}
       TF_VAR_db_password: ${{ secrets.TF_VAR_DB_PASSWORD}}
-      
+
     steps:
     - uses: actions/checkout@v2
 
@@ -47,13 +47,13 @@ jobs:
         echo "Executing Terraform $TF_COMMAND"
         case $TF_COMMAND in
           plan)
-            terraform plan -lock=false
+            terraform plan 
             ;;
           apply)
-            terraform apply -auto-approve -lock=false
+            terraform apply -auto-approve 
             ;;
           destroy)
-            terraform destroy -auto-approve -lock=false
+            terraform destroy -auto-approve 
             ;;
           *)
             echo "No valid command selected."
