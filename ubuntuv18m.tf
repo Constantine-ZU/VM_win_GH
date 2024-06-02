@@ -20,7 +20,7 @@ resource "azurerm_linux_virtual_machine" "vm_10_6" {
     username   = "ubuntu"
     public_key = var.ssh_public_key  
   }
-  depends_on = [azurerm_postgresql_flexible_server.pg_db]
+#   depends_on = [azurerm_postgresql_flexible_server.pg_db]
 }
 
 resource "azurerm_linux_virtual_machine" "vm_20_7" {
@@ -53,7 +53,7 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
       type        = "ssh"
       host        = self.public_ip_address
       user        = "ubuntu"
-      private_key = file("az_ssh_key.pem")
+      private_key = file("${path.module}/az_ssh_key.pem")
     }
   }
 
@@ -64,7 +64,7 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
       type        = "ssh"
       host        = self.public_ip_address
       user        = "ubuntu"
-      private_key = file("az_ssh_key.pem")
+      private_key = file("${path.module}/az_ssh_key.pem")
     }
   }
   provisioner "remote-exec" {
@@ -89,10 +89,10 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
       type        = "ssh"
       host        = self.public_ip_address
       user        = "ubuntu"
-      private_key = file(var.ssh_private_key)
+      private_key = file("${path.module}/az_ssh_key.pem")
     }
   }
 
 
-  depends_on = [azurerm_postgresql_flexible_server.pg_db]
+#   depends_on = [azurerm_postgresql_flexible_server.pg_db]
 }
