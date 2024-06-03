@@ -1,23 +1,25 @@
 #!/bin/bash
 
-DB_HOST=${DB_HOST:-"pgaws.pam4.com"}
+DB_HOST=${DB_HOST:-"pgaz.pam4.com"}
 DB_USER=${DB_USER:-"dbuser"}
 DB_PASS=${DB_PASS:-"password"}
 DB_NAME=${DB_NAME:-"dbwebaws"}
-S3_BUCKET=${S3_BUCKET:-"s3://constantine-z-2/"}
+ST_ACCOUNT=${ST_ACCOUNT:-"constantine2zu"}
+ACC_KEY=${ACC_KEY:-"XXX"}
 
-
-DUMP_FILE_PATH="${S3_BUCKET}${DB_NAME}_backup.dump"
+#DUMP_FILE_PATH="${S3_BUCKET}${DB_NAME}_backup.dump"
 
 echo "!-apt-get update"
 sudo apt-get update
 sudo apt-get install -y postgresql-client
 
-echo "!- Setup AWS-cli"
-sudo snap install aws-cli --classic
+echo "!- Setup az-cli"
+sudo apt install azure-cli -y
+
 
 echo "!-Downloading database dump from S3..."
-aws s3 cp ${DUMP_FILE_PATH} ~/dbwebaws_backup.dump
+az storage blob download --container-name web --name dbwebaws_backup.dump --file ~/dbwebaws_backup.dump --account-name constantine2zu --auth-mode key --account-key ${ACC_KEY}
+#aws s3 cp ${DUMP_FILE_PATH} ~/dbwebaws_backup.dump
 
 
 # echo "!-Waiting for the PostgreSQL database to become ready..."
