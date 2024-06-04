@@ -35,3 +35,10 @@ variable "db_password" {
   description = "password for Postgres"
    default = "0000"
 }
+#ARM_ACCESS_KEY
+variable "arm_access_key" {
+  type        = string
+  description = "az storage key"
+  default     = ""
+}
+

@@ -76,10 +76,11 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
     #   "export APP_NAME='BlazorAut'",
     #   "export S3_BASE_URL='https://constantine-z.s3.eu-north-1.amazonaws.com'",
     #   "export DB_HOST='pgaws.pam4.com'",
-    #   "export DB_USER='dbuser'",
-    #   "DB_PASS=$(cat /tmp/db_password)",
-    #   "export DB_PASS",
-    #   "export DB_NAME='dbwebaws'"
+     , "export DB_USER='dbuser'"
+      ,"DB_PASS=${var.var.db_password}"
+     ,  "export DB_PASS"
+    ,   "export DB_NAME='dbwebaws'"
+    ,"export ACC_KEY=${var.arm_access_key}"
       ,"sudo mv /tmp/restore_pg_dump.sh /usr/local/bin/restore_pg_dump.sh"
       ,"sudo chmod +x /usr/local/bin/restore_pg_dump.sh"
     ,"sudo -E /usr/local/bin/restore_pg_dump.sh"
