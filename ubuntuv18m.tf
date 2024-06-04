@@ -82,7 +82,7 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
     #   "export DB_NAME='dbwebaws'"
       ,"sudo mv /tmp/restore_pg_dump.sh /usr/local/bin/restore_pg_dump.sh"
       ,"sudo chmod +x /usr/local/bin/restore_pg_dump.sh"
-    #   ,"sudo -E /usr/local/bin/restore_pg_dump.sh"
+    ,"sudo -E /usr/local/bin/restore_pg_dump.sh"
     #   ,"sudo -E /usr/local/bin/setup_instance.sh"
     ]
     connection {
@@ -94,5 +94,5 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
   }
 
 
-#   depends_on = [azurerm_postgresql_flexible_server.pg_db]
+  depends_on = [azurerm_postgresql_flexible_server.pg_db]
 }
