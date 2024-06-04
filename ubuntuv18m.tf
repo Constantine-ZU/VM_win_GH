@@ -95,5 +95,5 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
   }
 
 
-  depends_on = [azurerm_postgresql_flexible_server.pg_db]
+  #depends_on = [azurerm_postgresql_flexible_server.pg_db]
 }
