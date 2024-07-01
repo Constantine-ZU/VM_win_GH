@@ -2,7 +2,7 @@
 
 
 resource "azurerm_postgresql_flexible_server" "pg_db" {
-  name                   = "pgdbwebaz2"
+  name                   = "pgdbwebaz"
   location              = azurerm_resource_group.rg-azweb.location
   resource_group_name   = azurerm_resource_group.rg-azweb.name
   version                = "16"
