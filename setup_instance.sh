@@ -9,7 +9,7 @@ AZURE_CONTAINER_NAME="web"
 # Update system and install necessary tools
 sudo apt-get update
 sudo apt-get install -y postgresql-client azure-cli jq
-sudo apt install azure-cli -y
+
 # Download PFX file from Azure Blob Storage
 echo "!-Downloading PFX file from Azure..."
 az storage blob download --container-name $AZURE_CONTAINER_NAME --name $PFX_FILE_NAME --file /etc/ssl/certs/${APP_NAME}.pfx --account-name $AZURE_STORAGE_ACCOUNT --auth-mode key --account-key ${ACC_KEY}
@@ -17,11 +17,12 @@ sudo chmod 600 /etc/ssl/certs/${APP_NAME}.pfx
 
 # Download and setup the web application
 sudo mkdir -p /var/www/${APP_NAME}
-echo "!-Downloading web app executable..."
-curl -L -o /var/www/${APP_NAME}/${APP_NAME} https://github.com/Constantine-SRV/BlazorAut/releases/download/build-all-20240630185327/BlazorAut
-sudo chmod +x /var/www/${APP_NAME}/${APP_NAME}
+echo "!-Downloading web app archive..."
+curl -L -o /var/www/${APP_NAME}/BlazorAut.tar.gz https://github.com/Constantine-SRV/BlazorAut/releases/download/latest_release/BlazorAut-linux.tar.gz
+echo "!-Extracting web app archive..."
+sudo tar -xf /var/www/${APP_NAME}/BlazorAut.tar.gz -C /var/www/${APP_NAME}
+sudo chmod +x /var/www/${APP_NAME}/BlazorAut
 sudo chmod -R 755 /var/www/${APP_NAME}/wwwroot/
-
 
 # Configure app settings
 APPSETTINGS_PATH="/var/www/${APP_NAME}/appsettings.json"
@@ -37,7 +38,7 @@ Description=${APP_NAME} Web App
 
 [Service]
 WorkingDirectory=/var/www/${APP_NAME}
-ExecStart=/var/www/${APP_NAME}/${APP_NAME}
+ExecStart=/var/www/${APP_NAME}/BlazorAut
 Restart=always
 RestartSec=10
 SyslogIdentifier=${APP_NAME}

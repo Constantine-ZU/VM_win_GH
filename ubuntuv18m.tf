@@ -71,7 +71,7 @@ resource "azurerm_linux_virtual_machine" "vm_20_7" {
     inline = [
       "sudo mv /tmp/setup_instance.sh /usr/local/bin/setup_instance.sh"
       ,"sudo chmod +x /usr/local/bin/setup_instance.sh"
-       , "export PFX_FILE_NAME='webaws_pam4_com_2024_05_13.pfx'"
+       , "export PFX_FILE_NAME='webaws_pam4_com.pfx'"
       ,"export APP_NAME='BlazorAut'"
         ,"export DB_USER='dbuser'"
         ,"export DB_PASS=${var.db_password}"
