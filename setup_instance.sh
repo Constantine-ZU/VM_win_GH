@@ -6,6 +6,9 @@ DB_HOST=${DB_HOST:-"pgaz.pam4.com"}
 AZURE_STORAGE_ACCOUNT="constantine2zu"
 AZURE_CONTAINER_NAME="web"
 
+# Add Microsoft repository for Azure CLI
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
 # Update system and install necessary tools
 sudo apt-get update
 sudo apt-get install -y postgresql-client azure-cli jq
