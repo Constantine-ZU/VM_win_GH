@@ -2,7 +2,7 @@
 
 # Default settings for Azure
 PFX_FILE_NAME=${PFX_FILE_NAME:-"webaws_pam4_com.pfx"}
-APP_NAME=${APP_NAME:-"BlazorAut"}
+DB_HOST=${DB_HOST:-"pgaz.pam4.com"}
 AZURE_STORAGE_ACCOUNT="constantine2zu"
 AZURE_CONTAINER_NAME="web"
 
@@ -12,20 +12,20 @@ sudo apt-get install -y postgresql-client azure-cli jq
 
 # Download PFX file from Azure Blob Storage
 echo "!-Downloading PFX file from Azure..."
-az storage blob download --container-name $AZURE_CONTAINER_NAME --name $PFX_FILE_NAME --file /etc/ssl/certs/${APP_NAME}.pfx --account-name $AZURE_STORAGE_ACCOUNT --auth-mode key --account-key ${ACC_KEY}
-sudo chmod 600 /etc/ssl/certs/${APP_NAME}.pfx
+az storage blob download --container-name $AZURE_CONTAINER_NAME --name $PFX_FILE_NAME --file /etc/ssl/certs/webaws_pam4_com.pfx --account-name $AZURE_STORAGE_ACCOUNT --auth-mode key --account-key ${ACC_KEY}
+sudo chmod 600 /etc/ssl/certs/webaws_pam4_com.pfx
 
 # Download and setup the web application
-sudo mkdir -p /var/www/${APP_NAME}
+sudo mkdir -p /var/www/BlazorAut
 echo "!-Downloading web app archive..."
-curl -L -o /var/www/${APP_NAME}/BlazorAut.tar.gz https://github.com/Constantine-SRV/BlazorAut/releases/download/latest_release/BlazorAut-linux.tar.gz
+curl -L -o /var/www/BlazorAut/BlazorAut.tar.gz https://github.com/Constantine-SRV/BlazorAut/releases/download/latest_release/BlazorAut-linux.tar.gz
 echo "!-Extracting web app archive..."
-sudo tar -xf /var/www/${APP_NAME}/BlazorAut.tar.gz -C /var/www/${APP_NAME}
-sudo chmod +x /var/www/${APP_NAME}/BlazorAut
-sudo chmod -R 755 /var/www/${APP_NAME}/wwwroot/
+sudo tar -xf /var/www/BlazorAut/BlazorAut.tar.gz -C /var/www/BlazorAut
+sudo chmod +x /var/www/BlazorAut/BlazorAut
+sudo chmod -R 755 /var/www/BlazorAut/wwwroot/
 
 # Configure app settings
-APPSETTINGS_PATH="/var/www/${APP_NAME}/appsettings.json"
+APPSETTINGS_PATH="/var/www/BlazorAut/appsettings.json"
 jq --arg db_host "$DB_HOST" \
    --arg db_user "$DB_USER" \
    --arg db_pass "$DB_PASS" \
@@ -34,18 +34,19 @@ jq --arg db_host "$DB_HOST" \
 
 # Setup service
 echo "[Unit]
-Description=${APP_NAME} Web App
+Description=BlazorAut Web App
 
 [Service]
-WorkingDirectory=/var/www/${APP_NAME}
-ExecStart=/var/www/${APP_NAME}/BlazorAut
+Environment=\"AZURE_STORAGE_KEY=${ACC_KEY}\"
+WorkingDirectory=/var/www/BlazorAut
+ExecStart=/var/www/BlazorAut/BlazorAut
 Restart=always
 RestartSec=10
-SyslogIdentifier=${APP_NAME}
+SyslogIdentifier=BlazorAut
 
 [Install]
-WantedBy=multi-user.target" | sudo tee /etc/systemd/system/${APP_NAME}.service
+WantedBy=multi-user.target" | sudo tee /etc/systemd/system/BlazorAut.service
 
 sudo systemctl daemon-reload
-sudo systemctl enable ${APP_NAME}
-sudo systemctl start ${APP_NAME}
+sudo systemctl enable BlazorAut
+sudo systemctl start BlazorAut
